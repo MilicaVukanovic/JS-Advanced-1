@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates</title>
+</head>
+<body>
+    <div id="people">
+
+    </div>
+    <template id="person-template">
+        <h3>Person info</h3>
+        <div>
+            <img width="100" src="{{image}}" alt="{{name}} {{surname}}  photo"/>
+        </div>
+        <p><b>First name: {{name}}</b></p>
+        <p><b>Last name: {{surname}}</b></p>
+        <p><b>Age: {{age}}</b></p>
+    </template>
+
+    <script>
+        const tmpPerson = document.getElementById("person-template");
+        const divPeople = document.getElementById("people");
+        
+        const people = [
+            {
+                "name": "Person 1",
+                "surname" : "Surname 1",
+                "age" : 27,
+                "image" : "https://i.picsum.photos/id/54/100/100.jpg"
+            },
+            {
+                "name": "Person 2",
+                "surname" : "Surname 2",
+                "age" : 20,
+                "image" : "https://i.picsum.photos/id/56/100/100.jpg"
+            },
+            {
+                "name": "Person 3",
+                "surname" : "Surname 3",
+                "age" : 27,
+                "image" : "https://i.picsum.photos/id/57/100/100.jpg"
+            }
+        ];
+
+        divPeople.innerHTML = "";
+        for(let person of people) {
+            divPeople.innerHTML += tmpPerson.innerHTML
+                                    .replace(/{{name}}/g, person.name)
+                                    .replace(/{{surname}}/g, person.surname)
+                                    .replace(/{{age}}/g,person.age)
+                                    .replace(/{{image}}/g, person.image);
+        }
+        //##age -> 27
+        //!!age -> 27
+    </script>
+</body>
+</html>

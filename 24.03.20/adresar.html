@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            display: grid;
+            grid-template-columns: 30rem auto;
+        }
+    </style>
+</head>
+
+<body>
+    <aside>
+        <div>
+            <p>Ime i prezime</p>
+            <input type="text" id="imeprezime">
+        </div>
+        <div>
+            <p>Telefon</p>
+            <input type="text" id="telefon">
+        </div>
+        <div>
+            <p>Mail</p>
+            <input type="email" id="mail">
+        </div>
+        <div>
+            <p>Slika</p>
+            <input type="text" id="slika">
+        </div>
+        <div>
+            <button id="dodaj">Dodaj</button>
+        </div>
+    </aside>
+    <main id="adresar">
+
+    </main>
+
+    <template id="osoba">
+        <p>Ime i prezime: {{imeprezime}}</p>
+        <p>Telefon: {{telefon}}</p>
+        {{mail}}
+        <div>
+            <img src="{{slika}}" alt="{{imeprezime}} photo">
+        </div>
+    </template>
+    <script>
+        const inputImePrezime = document.getElementById("imeprezime");
+        const inputTelefon = document.getElementById("telefon");
+        const inputMail = document.getElementById("mail");
+        const inputSlika = document.getElementById("slika");
+        const buttonDodaj = document.getElementById("dodaj");
+        const divAdresar = document.getElementById("adresar");
+        const tplOsoba = document.getElementById("osoba");
+
+        const no_photo = "https://www.exclusivehomedesign.it/wp-content/uploads/2018/07/noPhoto.png";
+
+        buttonDodaj.onclick = () => {
+            const imeprezime = inputImePrezime.value;
+            const telefon = inputTelefon.value;
+            const mail = inputMail.value;
+            let slika = inputSlika.value;
+            let html_mail = "";
+
+            if (imeprezime.trim().length == 0 || telefon.trim().length == 0) {
+                alert("Morate uneti vrednosti za ime, prezime i telefon");
+                return;
+            }
+
+            if (mail.trim().length != 0) {
+                html_mail = `<p>Mail: ${mail}</p>`;
+            }
+
+            if (slika.trim().length == 0) {
+                slika = no_photo;
+            }
+
+            divAdresar.innerHTML += tplOsoba.innerHTML
+                .replace(/{{imeprezime}}/g, imeprezime)
+                .replace(/{{telefon}}/g, telefon)
+                .replace(/{{mail}}/g, html_mail)
+                .replace(/{{slika}}/g, slika);
+        }
+    </script>
+</body>
+</html>

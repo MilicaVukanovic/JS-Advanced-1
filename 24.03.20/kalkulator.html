@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator</title>
+</head>
+<body>
+    <div>
+        <p>First number:</p>
+        <input id="firstNumber" type="number"/>
+    </div>
+    <div>
+        <p>Second number:</p>
+        <input id="secondNumber" type="number"/>
+    </div>
+    <div>
+        <button id="add">Add</button>
+    </div>
+    <div id="result"></div>
+    <script>
+        const inputFN = document.getElementById("firstNumber");
+        const inputSN = document.getElementById("secondNumber");
+        const buttonAdd = document.getElementById("add");
+        const divResult = document.getElementById("result");
+
+        function add(a,b) {
+            return a + b;
+        }
+
+        buttonAdd.onclick = () => {
+            const fn = Number(inputFN.value);
+            const sn = Number(inputSN.value);
+
+            const r = add(fn, sn);
+            divResult.innerHTML = `
+            <p>Rezultat sabiranja ${fn} i ${sn} je ${fn+sn}.</p>
+            `;
+        }
+    </script>
+</body>
+</html>
